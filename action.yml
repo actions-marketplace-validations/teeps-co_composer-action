@@ -1,0 +1,112 @@
+name: 'Teeps Composer'
+description: 'Use Composer CLI in Teeps Github Actions'
+inputs:
+  php_version:
+    description: What version of PHP to use
+    default: latest
+    required: false
+
+  composer_version:
+    description: What version of Composer to use
+    default: latest
+    required: false
+
+  command:
+    description: Composer command to run
+    required: true
+    default: install
+
+  only_args:
+    description: "Only run the desired command with this args. Ignoring all other provided arguments"
+    required: false
+
+  interaction:
+    description: "Whether to ask any interactive questions. Values: 'yes' or 'no'"
+    required: false
+    default: no
+
+  suggest:
+    description: "Whether to show package suggestions. Values: 'yes' or 'no'"
+    required: false
+    default: no
+
+  dev:
+    description: "Whether to install dev packages. Values: 'yes' or 'no'"
+    required: false
+    default: yes
+
+  progress:
+    description: "Whether to output download progress"
+    required: false
+    default: no
+
+  quiet:
+    description: "Whether to suppress all messages"
+    required: false
+    default: no
+
+  args:
+    description: Optional arguments to pass
+    required: false
+
+  ssh_key:
+    description: The private key contents to use for private repositories
+    required: false
+
+  ssh_key_pub:
+    description: The public key contents to use for private repositories
+    required: false
+
+  ssh_domain:
+    description: The domain to gather SSH public keys for (automatic for github.com, gitlab.com, bitbucket.org)
+    required: false
+
+  oauth_token:
+    description: The user oauth key to use for private repositories
+    required: false
+
+  oauth_domain:
+    description: The oauth domain to gather oauth_token for
+    required: false
+
+  packagist_username:
+    description: The username to use for private packagist repositories
+    required: false
+
+  packagist_token:
+    description: The token to use for private packagist repositories
+    required: false
+
+  working_dir:
+    description: Use the given directory as working directory
+    required: false
+
+outputs:
+  time:
+    description: 'The time the action was run'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    action_php_version: ${{ inputs.php_version }}
+    action_composer_version: ${{ inputs.composer_version }}
+    action_command: ${{ inputs.command }}
+    action_only_args: ${{ inputs.only_args }}
+    action_interaction: ${{ inputs.interaction }}
+    action_suggest: ${{ inputs.suggest }}
+    action_dev: ${{ inputs.dev }}
+    action_progress: ${{ inputs.progress }}
+    action_quiet: ${{ inputs.quiet }}
+    action_args: ${{ inputs.args }}
+    action_ssh_key: ${{ inputs.ssh_key }}
+    action_ssh_key_pub: ${{ inputs.ssh_key_pub }}
+    action_ssh_domain: ${{ inputs.ssh_domain }}
+    action_oauth_token: ${{ inputs.oauth_token }}
+    action_oauth_domain: ${{ inputs.oauth_domain }}
+    action_packagist_username: ${{ inputs.packagist_username }}
+    action_packagist_token: ${{ inputs.packagist_token }}
+    action_working_dir: ${{ inputs.working_dir }}
+
+branding:
+  icon: 'package'  
+  color: 'purple'
